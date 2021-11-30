@@ -2,13 +2,25 @@
  {
   "docstatus": 0,
   "doctype": "Workflow State",
+  "icon": "",
+  "modified": "2020-10-11 00:53:35.975307",
+  "name": "Draft",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "style": "Danger",
+  "workflow_state_name": "Draft"
+  },
+  {
+  "docstatus": 0,
+  "doctype": "Workflow State",
   "icon": "question-sign",
   "modified": "2020-10-11 00:53:35.970465",
   "name": "Pending",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "style": "",
+  "style": "primary",
   "workflow_state_name": "Pending"
  },
  {
@@ -38,13 +50,25 @@
  {
   "docstatus": 0,
   "doctype": "Workflow State",
-  "icon": "",
+  "icon": "remove",
+  "modified": "2020-10-11 00:53:35.975307",
+  "name": "Cancelled",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "style": "Danger",
+  "workflow_state_name": "Cancelled"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow State",
+  "icon": "question-sign",
   "modified": "2020-10-21 22:21:33.442328",
   "name": "Requested",
   "parent": null,
   "parentfield": null,
   "parenttype": null,
-  "style": "",
+  "style": "Warning",
   "workflow_state_name": "Requested"
  }
 ]
