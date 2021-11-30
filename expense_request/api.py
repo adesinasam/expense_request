@@ -168,8 +168,8 @@ def make_journal_entry(expense_entry):
         je = frappe.get_doc({
             'title': expense_entry.name,
             'doctype': 'Journal Entry',
-            'voucher_type': 'Journal Entry',
-            'posting_date': utils.today(),
+            'voucher_type': 'Expense Entry',
+            'posting_date': expense_entry.posting_date,
             'company': expense_entry.company,
             'accounts': accounts,
             'user_remark': expense_entry.remarks,
@@ -189,3 +189,13 @@ def make_journal_entry(expense_entry):
 
         je.insert()
         je.submit()
+    
+    elif expense_entry.status == "Cancelled":
+
+        pr_name = frappe.db.get_value("Journal Entry",{"bill_no": expense_entry.name}, "name")
+        
+        pr = frappe.get_doc("Journal Entry", pr_name)
+        pr.cancel()
+  
+
+   
