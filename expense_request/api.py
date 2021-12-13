@@ -92,7 +92,9 @@ def setup(expense_entry, method):
     expense_entry.total = total
     expense_entry.quantity = count
 
-    make_journal_entry(expense_entry)    
+    make_journal_entry(expense_entry)
+
+    
 
 
 @frappe.whitelist()
@@ -100,9 +102,6 @@ def initialise_journal_entry(expense_entry_name):
     # make JE from javascript form Make JE button
 
     make_journal_entry(
-        frappe.get_doc('Expense Entry', expense_entry_name)
-    )
-    cancel_journal_entry(
         frappe.get_doc('Expense Entry', expense_entry_name)
     )
 
@@ -191,35 +190,12 @@ def make_journal_entry(expense_entry):
         je.insert()
         je.submit()
     
-    # elif expense_entry.status == "Cancelled":
+    elif expense_entry.status == "Cancelled":
 
-    #     pr_name = frappe.db.get_value("Journal Entry",{"bill_no": expense_entry.name}, "name")
-        
-    #     pr = frappe.get_doc("Journal Entry", pr_name)
-    #     pr.cancel()
-  
-
-
-def setup_cancel(expense_entry, method):
-    # add expenses up and set the total field
-    # add default project and cost center to expense items
-
-    cancel_journal_entry(expense_entry)
-
-
-@frappe.whitelist()
-def initialise_journal_entry(expense_entry_name):
-    # make JE from javascript form Make JE button
-
-    cancel_journal_entry(
-        frappe.get_doc('Expense Entry', expense_entry_name)
-    )
-
-
-def cancel_journal_entry(expense_entry):
         pr_name = frappe.db.get_value("Journal Entry",{"bill_no": expense_entry.name}, "name")
         
         pr = frappe.get_doc("Journal Entry", pr_name)
         pr.cancel()
+  
 
    
