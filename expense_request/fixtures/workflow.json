@@ -16,19 +16,6 @@
     "allow_edit": "Expense User",
     "doc_status": "0",
     "is_optional_state": 0,
-    "message": "",
-    "next_action_email_template": "Expense Entry Approval",
-    "parent": "Expense Approval",
-    "parentfield": "states",
-    "parenttype": "Workflow",
-    "state": "Draft",
-    "update_field": "status",
-    "update_value": "Draft"
-   },
-   {
-    "allow_edit": "Expense User",
-    "doc_status": "0",
-    "is_optional_state": 0,
     "message": "Please Approve",
     "next_action_email_template": "Expense Entry Approval",
     "parent": "Expense Approval",
@@ -37,19 +24,6 @@
     "state": "Pending",
     "update_field": "status",
     "update_value": "Pending"
-   },
-   {
-    "allow_edit": "Expense User",
-    "doc_status": "0",
-    "is_optional_state": 0,
-    "message": "Please Approve",
-    "next_action_email_template": "Expense Entry Approval",
-    "parent": "Expense Approval",
-    "parentfield": "states",
-    "parenttype": "Workflow",
-    "state": "Requested",
-    "update_field": "status",
-    "update_value": "Requested"
    },
    {
     "allow_edit": "Expense User",
@@ -97,28 +71,6 @@
     "allow_self_approval": 1,
     "allowed": "Expense Approver",
     "condition": null,
-    "next_state": "Pending",
-    "parent": "Expense Approval",
-    "parentfield": "transitions",
-    "parenttype": "Workflow",
-    "state": "Draft"
-   },
-   {
-    "action": "Request",
-    "allow_self_approval": 1,
-    "allowed": "Expense Approver",
-    "condition": null,
-    "next_state": "Requested",
-    "parent": "Expense Approval",
-    "parentfield": "transitions",
-    "parenttype": "Workflow",
-    "state": "Draft"
-   },
-   {
-    "action": "Approve",
-    "allow_self_approval": 1,
-    "allowed": "Expense Approver",
-    "condition": null,
     "next_state": "Approved",
     "parent": "Expense Approval",
     "parentfield": "transitions",
@@ -135,28 +87,6 @@
     "parentfield": "transitions",
     "parenttype": "Workflow",
     "state": "Pending"
-   },
-   {
-    "action": "Approve",
-    "allow_self_approval": 1,
-    "allowed": "Expense Approver",
-    "condition": null,
-    "next_state": "Approved",
-    "parent": "Expense Approval",
-    "parentfield": "transitions",
-    "parenttype": "Workflow",
-    "state": "Requested"
-   },
-   {
-    "action": "Reject",
-    "allow_self_approval": 1,
-    "allowed": "Expense Approver",
-    "condition": null,
-    "next_state": "Rejected",
-    "parent": "Expense Approval",
-    "parentfield": "transitions",
-    "parenttype": "Workflow",
-    "state": "Requested"
    },
    {
     "action": "Cancel",
