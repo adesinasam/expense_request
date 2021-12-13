@@ -109,7 +109,7 @@ def initialise_journal_entry(expense_entry_name):
 
 def make_journal_entry(expense_entry):
 
-    # if expense_entry.status == "Approved":         
+    if expense_entry.status == "Approved":         
 
         # check for duplicates
         
