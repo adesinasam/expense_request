@@ -82,7 +82,7 @@ app_license = "MIT"
 doc_events = {
 	"Expense Entry": {
 		"on_update": "expense_request.api.setup",
-		"on_cancel": "expense_request.api.setup"
+		"on_cancel": "expense_request.api.setup_cancel"
 	}
 }
 
