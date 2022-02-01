@@ -143,9 +143,9 @@ def make_journal_entry(expense_entry):
                 title="Enter Payment Reference",
                 msg="Payment Reference and Date are Required for all non-cash payments."
             )
-        else:
-            expense_entry.clearance_date = ""
-            expense_entry.payment_reference = ""
+#         else:
+#             expense_entry.clearance_date = ""
+#             expense_entry.payment_reference = ""
 
 
         payment_mode = frappe.get_doc('Mode of Payment', expense_entry.mode_of_payment)
