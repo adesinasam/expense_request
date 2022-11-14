@@ -148,10 +148,10 @@ def make_journal_entry(expense_entry):
 #             expense_entry.payment_reference = ""
 
 
-        payment_mode = frappe.get_doc('Mode of Payment', expense_entry.mode_of_payment)
-        for acc in payment_mode.accounts:
-            pay_account = acc.default_account
-
+        pay_account = frappe.db.get_value('Mode of Payment Account', {'parent' : expense_entry.mode_of_payment, 'company' : expense_entry.company}, 'default_account')
+   
+   
+   
         if not pay_account or pay_account == "":
             frappe.throw(
                 title="Error",
