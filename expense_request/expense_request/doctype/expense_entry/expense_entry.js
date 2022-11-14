@@ -1,6 +1,8 @@
 // Copyright (c) 2020, Bantoo and contributors
 // For license information, please see license.txt
 
+frappe.provide("expense_entry.expense_entry");
+
 function update_totals(frm, cdt, cdn){
 	var items = locals[cdt][cdn];
     var total = 0;
@@ -69,7 +71,9 @@ frappe.ui.form.on('Expense Entry', {
 		frm.set_query("expense_account", 'expenses', () => {
 			return {
 				filters: [
-					["Account", "parent_account", "Like", "%Expenses%"]
+					["Account", "root_type", "=", "Expense"],
+					["Account", "parent_account", "Like", "%Indirect Expenses%"],
+                    			["Account", "is_group", "=", "0"]					
 				]
 			}
 		});
