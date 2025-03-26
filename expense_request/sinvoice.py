@@ -20,12 +20,10 @@ def validate(doc, method):
         
         # Set sales_man from customer if available
         if doc.customer and not doc.sales_man:
-            customer_sales_man = frappe.db.get_value("Customer", doc.customer, "cust_sales_man")
-            if customer_sales_man:
-                doc.sales_man = customer_sales_man
+            if doc.cust_sales_man:
+                doc.sales_man = doc.cust_sales_man
         
         # Set party_code from customer if available
         if doc.customer and not doc.party_code:
-            client_code = frappe.db.get_value("Customer", doc.customer, "client_code")
-            if client_code:
-                doc.party_code = client_code
+            if doc.client_code:
+                doc.party_code = doc.client_code
