@@ -80,6 +80,9 @@ app_license = "MIT"
 # Hook on document methods and events
 
 doc_events = {
+	"Sales Invoice": {
+		"before_submit": "expense_request.sinvoice.validate",
+	},
 	"Expense Entry": {
 		"on_submit": "expense_request.api.setup",
 		"on_cancel": "expense_request.apy.setup"
