@@ -27,3 +27,6 @@ def validate(doc, method):
         if doc.customer and not doc.party_code:
             if doc.client_code:
                 doc.party_code = doc.client_code
+
+    if doc.custom_default_subsidiary_company:
+        doc.subsidiary_company = doc.custom_default_subsidiary_company
