@@ -28,5 +28,10 @@ def validate(doc, method):
             if doc.client_code:
                 doc.party_code = doc.client_code
 
-    if doc.custom_default_subsidiary_company:
+    # Handle subsidiary company accounting dimension
+    if doc.get('custom_default_subsidiary_company'):
         doc.subsidiary_company = doc.custom_default_subsidiary_company
+
+        for item in doc.items:
+            if item.subsidiary_company != doc.custom_default_subsidiary_company:
+                item.subsidiary_company = doc.custom_default_subsidiary_company
