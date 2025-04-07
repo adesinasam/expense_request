@@ -81,7 +81,7 @@ app_license = "MIT"
 
 doc_events = {
 	"Sales Invoice": {
-		"before_save": "expense_request.sinvoice.validate",
+		"on_save": "expense_request.sinvoice.validate",
 	},
 	"Expense Entry": {
 		"on_submit": "expense_request.api.setup",
