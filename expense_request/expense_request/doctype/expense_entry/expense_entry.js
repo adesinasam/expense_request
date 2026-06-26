@@ -36,6 +36,14 @@ frappe.ui.form.on('Expense Entry Item', {
                 cur_frm.refresh_field("expenses");
             }
         }
+        if((d.project === "" || typeof d.project == 'undefined')) { 
+
+            if (cur_frm.doc.default_project != "" || typeof cur_frm.doc.default_project != 'undefined') {
+                
+                d.project = cur_frm.doc.default_project; 
+                cur_frm.refresh_field("expenses");
+            }
+        }
 	}
 	
 });
@@ -58,6 +66,9 @@ frappe.ui.form.on('Expense Entry', {
                 else {
                     d.cost_center = cur_frm.doc.default_cost_center; 
                 }
+            }
+            if(cur_frm.doc.default_project != "" || typeof cur_frm.doc.default_project != 'undefined') {                 
+                d.project = cur_frm.doc.default_project; 
             }
         }); 
         
@@ -111,6 +122,20 @@ frappe.ui.form.on('Expense Entry', {
 				]
 			}
 		});
+        frm.set_query("project", 'expenses', () => {
+            return {
+                filters: [
+                    ["Project", "company", "=", frm.doc.company]
+                ]
+            }
+        });
+        frm.set_query("default_project", () => {
+            return {
+                filters: [
+                    ["Project", "company", "=", frm.doc.company]
+                ]
+            }
+        });
 		
 	}
 

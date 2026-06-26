@@ -58,7 +58,7 @@
    "fieldname": "required_by",
    "fieldtype": "Datetime",
    "label": "Required By",
-   "reqd": 1
+   "reqd": 0
   },
   {
    "allow_in_quick_entry": 1,
