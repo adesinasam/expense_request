@@ -60,18 +60,6 @@ class ExpenseEntry(Document):
         	)
         
 
-        gl_entries.append(
-            self.get_gl_dict(
-                account=pay_account,
-                debit=0,
-                credit=self.total,
-                against_account=", ".join(expense_accounts),
-                remarks=self.remarks or "Expense Settlement",
-                cost_center=self.default_cost_center or "",
-                project=self.default_project or "",
-            )
-        )
-
         for row in self.expenses:
             expense_accounts.append(row.expense_account)
 
@@ -102,6 +90,19 @@ class ExpenseEntry(Document):
         #             remarks="Tax",
         #         )
         #     )
+
+
+        gl_entries.append(
+            self.get_gl_dict(
+                account=pay_account,
+                debit=0,
+                credit=self.total,
+                against_account=", ".join(expense_accounts),
+                remarks=self.remarks or "Expense Settlement",
+                cost_center=self.default_cost_center or "",
+                project=self.default_project or "",
+            )
+        )
 
 
         return gl_entries
