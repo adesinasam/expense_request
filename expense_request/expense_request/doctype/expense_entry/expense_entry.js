@@ -64,6 +64,23 @@ frappe.ui.form.on('Expense Entry', {
     },
     refresh(frm) {
         //update total and qty when an item is added
+	    if (frm.is_new()) return;
+
+	    if (frm.doc.docstatus === 0) {
+    	    frm.add_custom_button(__('Ledger Preview'), () => {
+        	    show_ledger_preview(frm);
+	        }, __('Preview'));
+    	}
+
+	    if (frm.doc.docstatus === 1) {
+    	    frm.add_custom_button(__('General Ledger'), () => {
+        	    frappe.set_route('query-report', 'General Ledger', {
+            	    voucher_type: frm.doc.doctype,
+                	voucher_no: frm.doc.name
+	            });
+    	    }, __('View'));
+	    }
+
 	},
 	onload(frm) {
 	    //console.log("hello");
@@ -98,3 +115,48 @@ frappe.ui.form.on('Expense Entry', {
 	}
 
 });
+
+
+function show_ledger_preview(frm) {
+    frappe.call({
+        method: 'get_gl_preview',
+        doc: frm.doc,
+        callback(r) {
+            if (r.message) {
+                const d = new frappe.ui.Dialog({
+                    title: __('Accounting Ledger Preview'),
+                    size: 'large',
+                    fields: [{ fieldtype: 'HTML', fieldname: 'html' }]
+                });
+
+                d.fields_dict.html.$wrapper.html(render_gl_table(r.message));
+                d.show();
+            }
+        }
+    });
+}
+
+function render_gl_table(entries) {
+    let rows = entries.map(e => `
+        <tr>
+            <td>${e.account}</td>
+            <td class="text-right">${format_currency(e.debit)}</td>
+            <td class="text-right">${format_currency(e.credit)}</td>
+            <td>${e.remarks || ''}</td>
+        </tr>
+    `).join('');
+
+    return `
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Account</th>
+                    <th>Debit</th>
+                    <th>Credit</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+        </table>
+    `;
+}

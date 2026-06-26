@@ -4,11 +4,11 @@ from . import __version__ as app_version
 
 app_name = "expense_request"
 app_title = "Expense Request"
-app_publisher = "Bantoo"
+app_publisher = "Wafgene Solutions"
 app_description = "ERPNext Expense Request"
 app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "hello@thebantoo.com"
+app_email = "sinaakinyemi@gmail.com"
 app_license = "MIT"
 
 # Includes in <head>
@@ -79,15 +79,15 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"Sales Invoice": {
-		"before_save": "expense_request.sinvoice.validate",
-	},
-	"Expense Entry": {
-		"on_submit": "expense_request.api.setup",
-		"on_cancel": "expense_request.apy.setup"
-	}
-}
+# doc_events = {
+# 	"Sales Invoice": {
+# 		"before_save": "expense_request.sinvoice.validate",
+# 	},
+# 	"Expense Entry": {
+# 		"on_submit": "expense_request.api.setup",
+# 		"on_cancel": "expense_request.apy.setup"
+# 	}
+# }
 
 # Scheduled Tasks
 # ---------------
