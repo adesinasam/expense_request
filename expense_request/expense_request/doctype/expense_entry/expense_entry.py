@@ -14,7 +14,9 @@ from frappe.model.document import Document
 from frappe.utils import flt
 from erpnext.accounts.general_ledger import make_gl_entries
 from erpnext.accounts.utils import get_account_currency
-
+from erpnext.accounts.doctype.accounting_dimension.accounting_dimension import (
+    get_accounting_dimensions,
+)
 
 class ExpenseEntry(Document):
 
@@ -140,12 +142,40 @@ class ExpenseEntry(Document):
         debit = flt(debit)
         credit = flt(credit)
 
-        return frappe._dict({
+        # return frappe._dict({
+        #     "posting_date": self.posting_date,
+        #     "company": self.company,
+        #     "voucher_type": self.doctype,
+        #     "voucher_subtype": self.doctype,
+        #     "voucher_no": self.name,
+        #     "account": account,
+
+        #     "debit": debit,
+        #     "credit": credit,
+
+        #     "account_currency": account_currency,
+        #     "debit_in_account_currency": debit,
+        #     "credit_in_account_currency": credit,
+
+        #     # "party_type": party_type,
+        #     # "party": party,
+
+        #     "against": against_account,
+        #     "against_account": against_account,
+
+        #     "cost_center": cost_center,
+        #     "project": project,
+        #     "remarks": remarks,
+        #     "is_opening": "No",
+        # })
+
+        gl = frappe._dict({
             "posting_date": self.posting_date,
             "company": self.company,
             "voucher_type": self.doctype,
             "voucher_subtype": self.doctype,
             "voucher_no": self.name,
+
             "account": account,
 
             "debit": debit,
@@ -155,14 +185,19 @@ class ExpenseEntry(Document):
             "debit_in_account_currency": debit,
             "credit_in_account_currency": credit,
 
-            # "party_type": party_type,
-            # "party": party,
-
             "against": against_account,
             "against_account": against_account,
 
             "cost_center": cost_center,
             "project": project,
+
             "remarks": remarks,
             "is_opening": "No",
         })
+
+        # Copy every Accounting Dimension from the parent document
+        for dimension in get_accounting_dimensions():
+            if self.meta.has_field(dimension):
+                gl[dimension] = self.get(dimension)
+
+        return gl

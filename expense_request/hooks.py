@@ -56,6 +56,8 @@ app_license = "MIT"
 
 # before_install = "expenses.install.before_install"
 # after_install = "expenses.install.after_install"
+after_install = "expense_request.dimension.create_dimension_fields"
+after_migrate = "expense_request.dimension.create_dimension_fields"
 
 # Desk Notifications
 # ------------------
@@ -79,15 +81,19 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"Sales Invoice": {
-# 		"before_save": "expense_request.sinvoice.validate",
-# 	},
-# 	"Expense Entry": {
-# 		"on_submit": "expense_request.api.setup",
-# 		"on_cancel": "expense_request.apy.setup"
-# 	}
-# }
+doc_events = {
+	"Sales Invoice": {
+		"before_save": "expense_request.sinvoice.validate",
+	},
+	"Expense Entry": {
+		# "on_submit": "expense_request.api.setup",
+		"on_cancel": "expense_request.apy.setup"
+	},
+	"Accounting Dimension": {
+		"after_insert": "expense_request.dimension.create_dimension_fields",
+		"on_update": "expense_request.dimension.create_dimension_fields"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
