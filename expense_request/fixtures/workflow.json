@@ -86,7 +86,7 @@
     "parent": "Expense Approval",
     "parentfield": "states",
     "parenttype": "Workflow",
-    "state": "Canceled",
+    "state": "Cancelled",
     "update_field": "status",
     "update_value": "Cancelled"
    }   
@@ -130,7 +130,7 @@
     "allow_self_approval": 1,
     "allowed": "Expense Approver",
     "condition": null,
-    "next_state": "Canceled",
+    "next_state": "Cancelled",
     "parent": "Expense Approval",
     "parentfield": "transitions",
     "parenttype": "Workflow",
